@@ -2,17 +2,19 @@ const express = require("express");
 const path = require("path");
 
 const app = express();
+
+// REQUIRED for hosting platforms
 const PORT = process.env.PORT || 3000;
 
-// Serve frontend files (if your index.html is in same folder)
+// Serve static files
 app.use(express.static(path.join(__dirname)));
 
-// Main route
+// Home route
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// Important for hosting platforms like Northflank
+// IMPORTANT: bind to 0.0.0.0 for Northflank
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`ConvertFlow running on port ${PORT}`);
+  console.log("Server running on port " + PORT);
 });
