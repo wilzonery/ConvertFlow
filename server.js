@@ -4,14 +4,15 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// serve all files in current folder
-app.use(express.static(__dirname));
+// Serve frontend files (if your index.html is in same folder)
+app.use(express.static(path.join(__dirname)));
 
-// default route
-app.get("*", (req, res) => {
+// Main route
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
+// Important for hosting platforms like Northflank
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`ConvertFlow running on port ${PORT}`);
 });
