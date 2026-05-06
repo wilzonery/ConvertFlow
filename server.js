@@ -3,18 +3,17 @@ const path = require("path");
 
 const app = express();
 
-// REQUIRED for hosting platforms
 const PORT = process.env.PORT || 3000;
 
-// Serve static files
+// serve frontend
 app.use(express.static(path.join(__dirname)));
 
-// Home route
+// homepage
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// IMPORTANT: bind to 0.0.0.0 for Northflank
+// important for hosting platforms
 app.listen(PORT, "0.0.0.0", () => {
-  console.log("Server running on port " + PORT);
+  console.log(`Server running on port ${PORT}`);
 });
